@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root{ 
+    --black: #1D1C1C;
+    --grey: #5B5B5B;
+    --red: #D72323;
+    --white: #ffffff;
+    --white2: #B6B6B6;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--black);
+}
+
+.header-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 3.8em;
+    border-bottom: 3px solid var(--grey);
+}
+
+.header-title > img{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.search-form{
+    margin: 10px 0;
+    display: flex;
+    border: 1px solid var(--white);
+}
+
+.search-form > *{
+    border: none;
+}
+
+.search-form > select{
+    padding: 0 8px;
+    border-right: 1px solid var(--white);
+}
+
+.search-form > input{
+    border-radius: 0;
+    width: 40em;
+    padding-left: 10px;
+}
+
+.search-form > button{
+    float: right;
+    padding: 0 8px;
+    border-left: 1px solid var(--white);
+}
+
+.login-btn{
+    height: 100%;
+}
+
+.login-btn > button{
+    border: none;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.header-body{
+    height: 2em;
+}
+
+.header-body > ul{
+    display: grid;
+    grid-template-columns: repeat(5, 10rem);
+    text-align: center;
+    height: 100%;
+}
+
+.header-body > ul > li > *{
+    height: 100%;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: block;
+    text-decoration: none;
+    color: var(--white2);
+}
+
+a:hover{
+    color: var(--white);
+}
+
+.dropdown-menu:hover .dropdown-content{
+    display: block;
+}
+
+.dropdown-content{
+    display: none;
+    background-color: var(--grey);
+    text-align: left;
+    padding-left: 10px;
+}
+
+.active{
+    color: var(--white);
+}

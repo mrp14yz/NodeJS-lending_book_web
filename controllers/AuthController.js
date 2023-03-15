@@ -14,14 +14,9 @@ const checkNotAuthenticate = (req, res, next) => {
     next()
 }
 
-const hasAuthorization = (req, res, next) => {
-    if(req.user.role == 'patron') return res.redirect('/')
-    next()
-}
 
 module.exports = {
     logoutHandler,
     checkAuthenticate,
-    checkNotAuthenticate,
-    hasAuthorization
+    checkNotAuthenticate
 }

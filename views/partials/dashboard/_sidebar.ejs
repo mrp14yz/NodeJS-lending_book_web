@@ -10,7 +10,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="images/test2.jpg" class="img-circle elevation-2" alt="User Image" style="height: 2.1rem;">
+          <img src="/images/test2.jpg" class="img-circle elevation-2" alt="User Image" style="height: 2.1rem;">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -34,8 +34,9 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="javascript:void(0)" class="nav-link active">
+              
+          <li class="nav-item <%= ['user', 'role', 'permission'].includes(locals.active) ? 'menu-open' : '' %>">
+            <a href="javascript:void(0)" class="nav-link <%= ['user', 'role', 'permission'].includes(locals.active) ? 'active' : '' %>">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Account Management
@@ -44,58 +45,65 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="/dashboard/account/user" class="nav-link <%= locals.active == 'user' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>User Management</p>
+                  <p>Manage User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="/dashboard/account/role" class="nav-link <%= locals.active == 'role' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Role Management</p>
+                  <p>Manage Role</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="/dashboard/account/permission" class="nav-link <%= locals.active == 'permission' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Permission Management</p>
+                  <p>Manage Permission</p>
                 </a>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
+          <li class="nav-item <%= ['author', 'category', 'book'].includes(locals.active) ? 'menu-open' : '' %>">
+            <a href="javascript:void(0)" class="nav-link <%= ['author', 'category', 'book'].includes(locals.active) ? 'active' : '' %>">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Bookshelf Management
+                Book Management
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="/dashboard/book/author" class="nav-link <%= locals.active == 'author' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Author Management</p>
+                  <p>Manage Author</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="/dashboard/book/category" class="nav-link <%= locals.active == 'category' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Category Management</p>
+                  <p>Manage Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="/dashboard/book/book" class="nav-link <%= locals.active == 'book' ? 'active' : ''%>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Book Management</p>
+                  <p>Manage Book</p>
                 </a>
               </li>
             </ul>
           </li>
-
           <li class="nav-item">
-            <a href="/logout" class="nav-link">
+            <a href="/dashboard/lending_book" class="nav-link <%= locals.active == 'lending_book' ? 'active' : ''%>">
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>
+                Lending Book
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout

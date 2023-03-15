@@ -1,0 +1,63 @@
+<form action="/dashboard/book/book" method="post" enctype="multipart/form-data" id="form-input" class="form-input-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cover">Cover Book</label>
+                <input type="file" class="filepond" name="cover" id="cover">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Enter title book" required>
+            </div>
+            <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" data-inputmask='"mask": "999-999-9999-99-9"' data-mask
+                        name="isbn" id="isbn">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <select class="form-control select2 position-relative" style="width: 100%;" name="author" id="author" required>
+                    <% for(author of authors){ %>
+                        <option value="<%= author.id %>">
+                            <%= author.name %>
+                        </option>
+                        <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control select2 position-relative" style="width: 100%;" name="category" id="category" required>
+                    <% for(category of categories){ %>
+                        <option value="<%= category.id %>">
+                            <%= category.name %>
+                        </option>
+                        <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="publish">Publish</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                        data-inputmask-inputformat="dd/mm/yyyy" data-mask name="publish" id="publish">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="total_pages">Total Pages</label>
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                        onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="total_pages"
+                        id="total_pages">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description Book</label>
+                <textarea class="form-control" name="description" id="description" rows="3"
+                    placeholder="Enter ..."></textarea>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../configs/db.config')
 const Book = require('./book')
-const BorrowBook = require('./borrowBook')
+const Borrow_Book = require('./borrow_book')
+const path = require('path')
 
 const User = sequelize.define('user', {
     id: {
@@ -22,24 +23,23 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    photo: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
-    address: DataTypes.STRING,
-    role: {
-        type: DataTypes.ENUM,
-        values: ['admin', 'librarian', 'patron'],
-        defaultValue: 'patron'
-    }
+    photo: {
+        type: DataTypes.STRING,
+        get(){
+            const fileName = this.getDataValue('photo')
+            const userPhoto = path.join('public', 'uploads/userPhotos/')
+            return fileName ? userPhoto + fileName : null
+        }
+    },
+    phone: DataTypes.STRING,
+    address: DataTypes.STRING
 })
 
 User.belongsToMany(Book, {
-    through: BorrowBook,
-    foreignKey: 'useriId',
-    onDelete: 'CASCADE'
+    through: Borrow_Book,
 })
 Book.belongsToMany(User, {
-    through: BorrowBook,
-    foreignKey: 'bookId'
+    through: Borrow_Book,
 })
 
 module.exports = User

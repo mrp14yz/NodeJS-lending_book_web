@@ -8,20 +8,27 @@
     
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="lib/fontawesome-free/css/all.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="lib/adminlte/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="lib/overlayScrollbars/css/OverlayScrollbars.min.css">  
+    <link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/lib/select2/css/select2.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link type="text/css" href="/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link type="text/css" href="/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- AdminLTE -->
+    <link rel="stylesheet" href="/lib/adminlte/css/adminlte.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/lib/toastr/toastr.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="/lib/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <% if(active == 'book'){ %>    
+    <!-- Filepond -->
+    <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"/>
+    <% } %>
+
     <title>Dashboard</title>
 </head>
 
@@ -34,46 +41,68 @@
     </div>
 
     <!-- jQuery -->
-    <script src="lib/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="lib/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>    
+    <script src="/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="lib/moment/moment.min.js"></script>
-    <script src="lib/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="lib/adminlte/js/adminlte.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables  & Plugins -->
-    <script src="lib/datatables/jquery.dataTables.min.js"></script>
-    <script src="lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="lib/jszip/jszip.min.js"></script>
-    <script src="lib/pdfmake/pdfmake.min.js"></script>
-    <script src="lib/pdfmake/vfs_fonts.js"></script>
-    <script src="lib/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="lib/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="lib/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(function () {
-            $("#table").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
-        });
-    </script>
+    <script src="/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/lib/jszip/jszip.min.js"></script>
+    <script src="/lib/pdfmake/pdfmake.min.js"></script>
+    <script src="/lib/pdfmake/vfs_fonts.js"></script>
+    <script src="/lib/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/lib/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/lib/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/lib/adminlte/js/adminlte.js"></script>
+    <!-- Select2 -->
+    <script src="/lib/select2/js/select2.full.min.js"></script>
+    <!-- Toastr -->
+    <script src="/lib/toastr/toastr.min.js"></script>
+    <!-- InputMask -->
+    <script src="/lib/moment/moment.min.js"></script>
+    <script src="/lib/inputmask/jquery.inputmask.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="/lib/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Custom Javascripts -->
+    <script defer src="/javascripts/dashboard/custom-button.js"></script>
+
+    <% if(active == 'user'){ %>    
+        <script src="/javascripts/dashboard/account/user/user.datatable.js"></script>
+        <script src="/javascripts/dashboard/account/user/user.ajax.js"></script>
+    <% } %>
+    <% if(active == 'role'){ %>    
+        <script src="/javascripts/dashboard/account/role/role.datatable.js"></script>
+        <script src="/javascripts/dashboard/account/role/role.ajax.js"></script>
+    <% } %>
+    <% if(active == 'permission'){ %>    
+        <script src="/javascripts/dashboard/account/permission/permission.datatable.js"></script>
+        <script src="/javascripts/dashboard/account/permission/permission.ajax.js"></script>
+    <% } %>
+    <% if(active == 'author'){ %>    
+        <script src="/javascripts/dashboard/book/author/author.datatable.js"></script>
+        <script src="/javascripts/dashboard/book/author/author.ajax.js"></script>
+    <% } %>
+    <% if(active == 'category'){ %>    
+        <script src="/javascripts/dashboard/book/category/category.datatable.js"></script>
+        <script src="/javascripts/dashboard/book/category/category.ajax.js"></script>
+    <% } %>
+    <% if(active == 'book'){ %>    
+        <!-- Filepond -->
+        <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        <script src="/javascripts/dashboard/book/book/book.datatable.js"></script>
+        <script src="/javascripts/dashboard/book/book/book.ajax.js"></script>
+        <script src="/javascripts/dashboard/book/book/book.fileUpload.js"></script>
+    <% } %>
+
 </body>
 
 </html>

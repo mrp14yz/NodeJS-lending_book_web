@@ -1,7 +1,7 @@
-const { DataTypes, Op, Model } = require('sequelize')
+const { DataTypes, Op } = require('sequelize')
 const sequelize = require('../configs/db.config')
-const slug = require('slug')
 const path = require('path')
+const fs = require('fs')
 
 const Book = sequelize.define('book', {
     id: {
@@ -21,30 +21,20 @@ const Book = sequelize.define('book', {
         type: DataTypes.STRING,
         get(){
             const fileName = this.getDataValue('cover')
-            const bookCoverPath = path.join('public', 'uploads/bookCovers/')
-            return fileName ? bookCoverPath + fileName : null
+            return fileName ? '/uploads/bookCovers/' + fileName : null
         }
     },
-    description: DataTypes.TEXT
+    description: DataTypes.STRING
 })
 
-const updateSlug = async (book, options) =>{
-    let newSlug = slug(book.title)
-    const { count } = await Book.findAndCountAll({
-        where:{
-            slug: {
-                [Op.startsWith]: newSlug
-            }
+Book
+    .addHook('afterDestroy', async (book, options) => {
+        if(book.cover){
+            const file = path.join('public', book.cover)
+            fs.unlink(file, err => {
+                if(err) console.error(err)
+            })
         }
     })
-    if(count > 0){
-        newSlug += `_${count}`
-    }
-    book.setDataValue('slug', newSlug)
-}
-
-Book
-    .addHook('beforeCreate', updateSlug)
-    .addHook('afterUpdate', updateSlug)
 
 module.exports = Book

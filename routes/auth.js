@@ -1,6 +1,6 @@
 const express = require('express')
-const passport = require('../middlewares/passport.middleware')
 const router = express.Router()
+const passport = require('../middlewares/passport.middleware')
 const { checkNotAuthenticate, logoutHandler }= require('../controllers/AuthController')
 
 router

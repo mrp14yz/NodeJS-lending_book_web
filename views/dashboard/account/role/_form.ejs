@@ -1,0 +1,17 @@
+<form action="/dashboard/account/role" method="post" id="form-input" class="form-input-data">
+    <div class="form-group">
+        <label for="name">Role</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter permission name">
+    </div>
+    <div class="form-group">
+        <label>Multiple</label>
+        <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;"
+            name="permission" id="permission">
+            <% for(permission of permission){ %>
+                <option value="<%= permission.id %>">
+                    <%= permission.name %>
+                </option>
+                <% } %>
+        </select>
+    </div>
+</form>

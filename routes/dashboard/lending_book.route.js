@@ -1,16 +1,17 @@
 const express = require('express')
 const router = express.Router()
+const { renderPageLendingBook, getAllLendingBook, editStatusLendingBook } = require('../../controllers/dashboard/lending_book.controller')
 
 router
     .route('/')
-    .get()
+    .get(renderPageLendingBook)
 
 router
     .route('/fetch')
-    .get()
+    .get(getAllLendingBook)
 
 router
     .route('/:id')
-    .put()
+    .put(editStatusLendingBook)
 
 module.exports = router

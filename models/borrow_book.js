@@ -9,7 +9,7 @@ const Borrow_Book = sequelize.define('borrow_book', {
     },
     due: DataTypes.DATE,
     status: {
-        type: DataTypes.ENUM(['process', 'accepted', 'declined', 'returned']),
+        type: DataTypes.ENUM(['process', 'accepted', 'declined' ,'returned']),
         defaultValue: 'process'
     },
     isLate: {

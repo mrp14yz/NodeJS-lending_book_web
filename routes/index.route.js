@@ -1,11 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const { renderPageHome } = require('../controllers/index.controller')
 
 router
     .route('/')
-    .get((req, res) => {
-        sess= req.user
-        res.render('index')
-    })
+    .get(renderPageHome)
 
 module.exports = router

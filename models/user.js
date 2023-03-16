@@ -35,11 +35,11 @@ const User = sequelize.define('user', {
     address: DataTypes.STRING
 })
 
-User.belongsToMany(Book, {
-    through: Borrow_Book,
-})
-Book.belongsToMany(User, {
-    through: Borrow_Book,
-})
+User.belongsToMany(Book, { through: Borrow_Book })
+Book.belongsToMany(User, { through: Borrow_Book })
+User.hasMany(Borrow_Book)
+Borrow_Book.belongsTo(User)
+Book.hasMany(Borrow_Book)
+Borrow_Book.belongsTo(Book)
 
 module.exports = User

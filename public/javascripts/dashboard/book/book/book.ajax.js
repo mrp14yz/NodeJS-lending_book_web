@@ -2,7 +2,7 @@
 $(document).ready(function () {
     setInterval( function () {
         $("#table").DataTable().ajax.reload(null, false)
-    }, 3000 )
+    }, 30000 )
 
     $('#btn-input').on('click', function(){
         $('.form-input-data')
@@ -76,7 +76,9 @@ $(document).ready(function () {
                     delay: 750,
                     body: data.status
                 })
-                $("#table").DataTable().ajax.reload(null, false)         
+                setTimeout(function(){
+                    $("#table").DataTable().ajax.reload(null, false)
+                }, 2000)
             }
         })  
     }) 

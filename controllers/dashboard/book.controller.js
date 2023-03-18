@@ -8,8 +8,12 @@ const slug = require('slug')
 const uploadPath = path.join('public', 'uploads/bookCovers/')
 
 const renderPageBook = async (req, res) => {
-    const authors = await Author.findAll()
-    const categories = await Category.findAll()
+    const authors = await Author.findAll({
+        attributes: ['id', 'name']
+    })
+    const categories = await Category.findAll({
+        attributes: ['id', 'name']
+    })
     res.render('dashboard/book/book', {
         layout: 'layouts/layout2',
         authors: authors,
@@ -21,8 +25,14 @@ const renderPageBook = async (req, res) => {
 const getAllBook = async (req, res) => {
     const books = await Book.findAll({
         include: [
-            { model: Author },
-            { model: Category }
+            { 
+                model: Author,
+                attributes: ['id', 'name']
+            },
+            { 
+                model: Category,
+                attributes: ['id', 'name']
+            }
         ]
     })
 
@@ -55,8 +65,14 @@ const addBook = async (req, res) => {
 const getBookById = async (req, res) => {
     const book = await Book.findByPk(req.params.id,{
         include:[
-            { model: Author },
-            { model: Category }
+            { 
+                model: Author,
+                attributes: ['id', 'name']
+            },
+            { 
+                model: Category,
+                attributes: ['id', 'name']
+            }
         ]
     })
 
@@ -67,8 +83,6 @@ const editBookById = async (req, res) => {
     const data = req.body
     const fileName = req.file ? req.file.filename : null
     data.cover = fileName
-    data.slug = await createBookSlug(data.title)
-    
     const book = await Book.findByPk(req.params.id)
     if(book._previousDataValues.cover) removeBookCover(book._previousDataValues.cover)
     await book.update(data)
@@ -102,9 +116,7 @@ async function createBookSlug(title){
             }
         }
     })
-    if(count > 0){
-        newSlug += `_${count}`
-    }
+    if(count > 0) newSlug += `_${ count+1 }`
     return newSlug
 }
 

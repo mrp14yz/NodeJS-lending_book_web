@@ -1,7 +1,7 @@
 const { DataTypes, Op } = require('sequelize')
 const sequelize = require('../configs/db.config')
-const slug = require('slug')
 const Book = require('./book')
+const slug = require('slug')
 
 const Author = sequelize.define('author', {
     id: {
@@ -14,28 +14,29 @@ const Author = sequelize.define('author', {
         allowNull: false
     },
     slug: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
     }
 })
 
-const updateSlug = async (author, options) =>{
-    let newSlug = slug(author.name, { remove: /[0-9]/g })
-        const { count } = await Author.findAndCountAll({
-            where:{
-                slug: {
-                    [Op.startsWith]: newSlug
-                }
-            }
-        })
-        if(count > 0){
-            newSlug += `_${count}`
-        }
-        author.setDataValue('slug', newSlug)
-}
-
 Author
-    .addHook('beforeCreate', updateSlug)
-    .addHook('afterUpdate', updateSlug)
+    .addHook('afterUpdate', async (author, options) => {
+        if(author.dataValues.name !== author._previousDataValues.name){
+            let newSlug = slug(author.name)
+            const { count } = await Author.findAndCountAll({
+                where: {
+                    slug: {
+                        [Op.startsWith]: newSlug
+                    },
+                    [ Op.not ]: {
+                        id: author.id
+                    }
+                }
+            })
+            if(count > 0) newSlug += `_${ count+1 }`
+            author.setDataValue('slug', newSlug)
+        }
+    })
 
 Author.hasMany(Book, { onDelete: 'CASCADE' })
 Book.belongsTo(Author)

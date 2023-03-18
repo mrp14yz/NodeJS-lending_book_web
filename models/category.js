@@ -11,7 +11,8 @@ const Category = sequelize.define('category', {
     name: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    slug: DataTypes.STRING
 })
 
 Category.hasMany(Book, { onDelete: 'SET NULL' })

@@ -1,0 +1,26 @@
+<div class="card w-75">
+    <div class="row">
+        <div class="col-4">
+            <img src="<%= book.cover %>" class="img-fluid w-100" alt="<%= book.title %>">
+        </div>
+        <div class="col-8">
+            <div class="card-header">
+                <a href="/book/<%= book.slug %>" class="card-title text-decoration-none">
+                    <h2>
+                        <%= book.title %>
+                    </h2>
+                </a>
+                <a href="/author/<%= book.author.slug%>" class="card-text text-decoration-none">
+                    <p class="card-title"><%= book.author.name %></p>
+                </a>
+                
+                <a href="/category/<%= book.category.slug%>" class="card-text text-decoration-none">
+                    <p class="card-title"><%= book.category.name %></p>
+                </a>
+            </div>            
+            <div class="card-body">
+                <p class="card-text"><%= book.description %></p>
+            </div>
+        </div>
+    </div>
+</div>

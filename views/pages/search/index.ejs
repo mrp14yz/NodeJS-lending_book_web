@@ -1,0 +1,8 @@
+<main>
+    <div class="container">
+    <% for(book of books){ %>
+        <%- include('../../partials/_book_item') %>
+    <% } %>
+    <%- include('../../partials/_pagination') %>
+    </div>      
+</main>

@@ -1,0 +1,12 @@
+<main>
+    <div class="container text-center">
+        <h1><%= author.name %></h1>
+        <div class="row row-cols-4">
+            <% for(book of author.books){ %>
+                <div class="col">
+                    <%- include('_author_book') %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</main>

@@ -4,7 +4,10 @@ const { validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 
 const renderPageUser = async (req, res) => {
-    const roles = await Role.findAll()
+    const roles = await Role.findAll({
+        attributes: ['id', 'name']
+    })
+    
     res.render('dashboard/account/user', {
         layout: 'layouts/layout2',
         roles: roles,

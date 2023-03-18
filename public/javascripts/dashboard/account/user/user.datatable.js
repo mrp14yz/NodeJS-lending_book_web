@@ -51,6 +51,8 @@ $(function () {
 })
 
 $(document).ready(function () {
-    $('.select2').select2()
+    $('.select2').select2({
+        dropdownParent: $('.form-input-data')
+    })
     $('[data-mask]').inputmask()
 })

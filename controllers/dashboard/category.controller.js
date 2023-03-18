@@ -1,4 +1,5 @@
 const Category = require('../../models/category')
+const slug = require('slug')
 
 const renderPageCategory = (req, res) => {
     res.render('dashboard/book/category', {
@@ -16,6 +17,7 @@ const getAllCategory = async (req, res) => {
 }
 
 const addCategory = async (req, res) => {
+    req.body.slug = slug(req.body.name)
     await Category.create(req.body)
 
     res.json({
@@ -30,6 +32,7 @@ const getCategoryById = async (req, res) => {
 }
 
 const editCategoryById = async (req, res) => {
+    req.body.slug = slug(req.body.name)
     await Category.update(req.body, {
         where:{
             id: req.params.id

@@ -6,6 +6,7 @@ const { Op } = require('sequelize')
 const renderPageResultSearch = async(req, res) => {
     let page = req.query.page ? req.query.page : 1
     let searchInput = req.query.search
+    const limit = 10
     
     const { count, rows } = await Book.findAndCountAll({
         where: {
@@ -24,14 +25,14 @@ const renderPageResultSearch = async(req, res) => {
         order: [
             ['createdAt', 'DESC']
         ],
-        limit:10,
-        offset: (page-1)*10
+        limit: limit,
+        offset: (page-1)*limit
     })
     
     res.render('pages/search', {
         books: rows,
         currentPage: page,
-        totalPage: Math.ceil(count/10),
+        totalPage: Math.ceil(count/limit),
         url:  `/search/search=${ searchInput }&page=`
     })
 }

@@ -3,13 +3,8 @@ const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
-passport.use('local-signin', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-},
-function(req, email, password, done){
-    const user = User.findOne({
+const authenticateUser = async (req, email, password, done) => {
+    await User.findOne({
         where: {
             email: email
         }
@@ -21,11 +16,15 @@ function(req, email, password, done){
             return done(null, false, req.flash('error', 'Email/Username incorrect'))
     })
 }
-))
 
+passport.use('local-signin', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+}, authenticateUser ))
 
 passport.serializeUser(function(user, done){
-    done(null, user.id)
+    return done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){

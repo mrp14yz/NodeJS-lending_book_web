@@ -5,14 +5,15 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
-const passport = require('passport')
 const session = require('express-session')
+const passport = require('passport')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
 const sequelize = require('./configs/db.config')
 
 //sequelize.sync({ alter: true })
 const indexRouter = require('./routes/index.route')
+const authRouter = require('./routes/auth.route')
 const categoryRouter = require('./routes/pages/category.route')
 const authorRouter = require('./routes/pages/author.route')
 const bookRouter = require('./routes/pages/book.route')
@@ -33,20 +34,22 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(session({
-    secret: 'thisissuperdupersession',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie:{
-      secure: true,
+      //secure: true,
       httpOnly: true,
       sameSite: true
     }
 }))
+app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use(methodOverride('_method'))
 
 app.use('/', indexRouter)
+app.use('/', authRouter)
 app.use('/category', categoryRouter)
 app.use('/author', authorRouter)
 app.use('/book', bookRouter)

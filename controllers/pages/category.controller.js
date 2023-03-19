@@ -5,6 +5,7 @@ const Author = require('../../models/author')
 const renderPageCategoryBySlug = async (req, res) => {
     let page = req.query.page ? req.query.page : 1
     const slug = req.params.slug
+    const limit = 10
     
     const { count, rows } = await Book.findAndCountAll({
         attributes: ['slug', 'title', 'cover', 'description'],
@@ -15,14 +16,14 @@ const renderPageCategoryBySlug = async (req, res) => {
         order: [
             ['createdAt', 'DESC']
         ],
-        limit:1,
-        offset: (page-1)*10
+        limit: limit,
+        offset: (page-1)*limit
     })
 
    res.render('pages/category', {
        books: rows,
        currentPage: page,
-       totalPage: Math.ceil(count/10),
+       totalPage: Math.ceil(count/limit),
        url:  `/category/${slug}/?page=`
    })
 }

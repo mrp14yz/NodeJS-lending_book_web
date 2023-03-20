@@ -8,11 +8,12 @@ const {
     getAllRole, 
     getRoleById
 } = require('../../controllers/dashboard/role.controller')
+const hasPermission = require('../../middlewares/authorize.middleware')
 
 router
     .route('/')
-    .get(renderPageRole)
-    .post(addRole)
+    .get(hasPermission('view role'), renderPageRole)
+    .post(hasPermission('add role'), addRole)
 
 router
     .route('/fetch')
@@ -21,7 +22,7 @@ router
 router
     .route('/:id')
     .get(getRoleById)
-    .put(editRoleById)
-    .delete(deleteRoleById)
+    .put(hasPermission('edit role'), editRoleById)
+    .delete(hasPermission('delete role'), deleteRoleById)
 
 module.exports = router

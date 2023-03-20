@@ -43,11 +43,14 @@ app.use(session({
       sameSite: true
     }
 }))
-app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use(methodOverride('_method'))
 
+app.use((req, res, next) => {
+  res.locals.user = req.user ? req.user : null
+  next()
+})
 app.use('/', indexRouter)
 app.use('/', authRouter)
 app.use('/category', categoryRouter)

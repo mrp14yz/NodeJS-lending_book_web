@@ -9,11 +9,12 @@ const {
     getAllUser 
 } = require('../../controllers/dashboard/user.controller')
 const { validateRegisterUser, validateEditUser } = require('../../middlewares/validator.middleware')
+const hasPermission = require('../../middlewares/authorize.middleware')
 
 router
     .route('/')
-    .get(renderPageUser)
-    .post(validateRegisterUser() ,addUser)
+    .get(hasPermission('view user'), renderPageUser)
+    .post(hasPermission('add user'), validateRegisterUser() ,addUser)
     
 router
     .route('/fetch')
@@ -22,7 +23,7 @@ router
 router
     .route('/:id')
     .get(getUserById)
-    .put(validateEditUser(), editUserById)
-    .delete(deleteUserById)
+    .put(hasPermission('edit user'), validateEditUser(), editUserById)
+    .delete(hasPermission('delete user'), deleteUserById)
 
 module.exports = router

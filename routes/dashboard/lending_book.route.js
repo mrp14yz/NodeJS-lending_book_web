@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const { renderPageLendingBook, getAllLendingBook, editStatusLendingBook } = require('../../controllers/dashboard/lending_book.controller')
+const hasPermission = require('../../middlewares/authorize.middleware')
 
 router
     .route('/')
-    .get(renderPageLendingBook)
+    .get(hasPermission('view lending book'), renderPageLendingBook)
 
 router
     .route('/fetch')
@@ -12,6 +13,6 @@ router
 
 router
     .route('/:id')
-    .put(editStatusLendingBook)
+    .put(hasPermission('change status lending'), editStatusLendingBook)
 
 module.exports = router

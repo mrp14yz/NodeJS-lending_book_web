@@ -3,6 +3,7 @@ const sequelize = require('../configs/db.config')
 const Book = require('./book')
 const Borrow_Book = require('./borrow_book')
 const path = require('path')
+const bcrypt = require('bcrypt')
 
 const User = sequelize.define('user', {
     id: {
@@ -34,6 +35,15 @@ const User = sequelize.define('user', {
     phone: DataTypes.STRING,
     address: DataTypes.STRING
 })
+
+User
+    .addHook('afterUpdate', async (user, options) => {
+        if(user.dataValues.password !== user._previousDataValues.password){
+            const salt = await bcrypt.genSalt()
+            const newPassword = await bcrypt.hash(user.password, salt)
+            user.setDataValue('password', newPassword)
+        }
+    })
 
 User.belongsToMany(Book, { through: Borrow_Book })
 Book.belongsToMany(User, { through: Borrow_Book })

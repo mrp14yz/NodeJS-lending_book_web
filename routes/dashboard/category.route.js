@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { renderPageCategory, addCategory, getAllCategory, getCategoryById, editCategoryById, deleteCategoryById } = require('../../controllers/dashboard/category.controller')
+const hasPermission = require('../../middlewares/authorize.middleware')
 
 router
     .route('/')
-    .get(renderPageCategory)
-    .post(addCategory)
+    .get(hasPermission('view category'), renderPageCategory)
+    .post(hasPermission('add category'), addCategory)
 
 router
     .route('/fetch')
@@ -14,7 +15,7 @@ router
 router
     .route('/:id')
     .get(getCategoryById)
-    .put(editCategoryById)
-    .delete(deleteCategoryById)
+    .put(hasPermission('edit category'), editCategoryById)
+    .delete(hasPermission('delete category'), deleteCategoryById)
 
 module.exports = router

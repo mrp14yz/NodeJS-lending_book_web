@@ -8,11 +8,12 @@ const {
     deletePermissionById, 
     getPermissionById
 } = require('../../controllers/dashboard/permission.controller')
+const hasPermission = require('../../middlewares/authorize.middleware')
 
 router
     .route('/')
-    .get(renderPagePermission)
-    .post(addPermission)
+    .get(hasPermission('view permission'), renderPagePermission)
+    .post(hasPermission('add permission'), addPermission)
 
 router
     .route('/fetch')
@@ -21,7 +22,7 @@ router
 router
     .route('/:id')
     .get(getPermissionById)
-    .put(editPermissionById)
-    .delete(deletePermissionById)
+    .put(hasPermission('edit permission'), editPermissionById)
+    .delete(hasPermission('delete permission'), deletePermissionById)
 
 module.exports = router

@@ -14,7 +14,7 @@
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Category
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu"  id="category-dropdown">
                 </ul>
               </li>
             </ul>
@@ -22,10 +22,22 @@
                 <input class="form-control rounded-0" type="search" placeholder="Search Book Title/Author/Description" aria-label="Search"  name="search">
                 <button class="btn btn-primary rounded-0" type="submit">Search</button>
             </form>
-            <a href="/login">
-              <button type="button" class="btn btn-outline-primary rounded-0 px-4">Login</button>
-            </a>
-            <!-- Button Dropdown User Start -->
+            <% if(user){ %>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= user.name %>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/profile" >Profile</a></li>
+                  <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            <% }else{ %>
+              <a href="/login">
+                <button type="button" class="btn btn-outline-primary rounded-0 px-4">Login</button>
+              </a>
+            <% } %>
           </div>
         </div>
       </nav>

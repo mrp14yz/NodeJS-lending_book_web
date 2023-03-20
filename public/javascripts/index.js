@@ -9,7 +9,7 @@ $(document).ready(function () {
                     html += `<li><a class="dropdown-item" href="/category/${ category.slug }">${ category.name }</a></li>`
                 })
                 
-                $('header .dropdown-menu').html(html)
+                $('header #category-dropdown').html(html)
             }
         })
     })

@@ -48,6 +48,14 @@ const addUser = async (req, res) => {
         const user = await User.create(req.body)
         if(req.body.role) {
             user.setRole(req.body.role)
+        }else{
+            const [role, created] = await Role.findOrCreate({
+                where: { name: 'patron' },
+                defaults: { name: 'patron' }
+            })
+    
+            if(created) user.setRole(created.id)
+            else user.setRole(role.id)
         }
 
         res.json({
@@ -95,6 +103,14 @@ const editUserById = async (req, res) => {
 
         if(req.body.role) {
             user.setRole(req.body.role)
+        }else{
+            const [role, created] = await Role.findOrCreate({
+                where: { name: 'patron' },
+                defaults: { name: 'patron' }
+            })
+    
+            if(created) user.setRole(created.id)
+            else user.setRole(role.id)
         }
 
         res.json({

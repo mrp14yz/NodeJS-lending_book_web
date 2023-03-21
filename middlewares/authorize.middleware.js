@@ -17,6 +17,7 @@ module.exports = function(permission) {
 
         const userPermission = (user.role.permissions).map(permission => permission.name)
         if(userPermission.includes(permission)) return next()
+        if(permission == 'access dashboard') return res.redirect('/')
         res.redirect('/dashboard')
     }
 }

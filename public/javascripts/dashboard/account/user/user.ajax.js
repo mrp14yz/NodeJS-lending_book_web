@@ -44,7 +44,7 @@ $(document).ready(function () {
                     .val(data.phone)
                 $('#form-edit #address')
                     .val(data.address)
-                $('#form-edit #role')
+                $('#form-edit #form-select2')
                     .val(data.role.id)
                     .trigger('change')
             }

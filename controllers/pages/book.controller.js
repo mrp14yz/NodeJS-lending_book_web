@@ -1,6 +1,7 @@
 const Book = require('../../models/book')
 const Category = require('../../models/category')
 const Author = require('../../models/author')
+const User = require('../../models/user')
 
 const renderPageBookBySlug = async (req, res) => {
     const book = await Book.findOne({
@@ -17,6 +18,11 @@ const renderPageBookBySlug = async (req, res) => {
     res.render('pages/book', {
         book: book,
     })
+}
+
+const borrowBookById = async (req, res) => {
+    const user = await User.findByPk(req.user.id)
+    //user.
 }
 
 module.exports = {

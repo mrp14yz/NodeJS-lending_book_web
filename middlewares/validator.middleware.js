@@ -52,27 +52,6 @@ function validateEditUser(){
     ]
 }
 
-function bookFormValidation(){
-    return [
-        body('title')
-            .isEmpty()
-            .withMessage('Book title should not be empty')
-            .trim(),
-        body('isbn')
-            .trim()
-            .matches(/\D/)
-            .withMessage('ISBN book only number allowed')
-            .length({ min: 10 })
-            .withMessage('ISBN minimal panjang 10')
-            .length({ max: 13 })
-            .withMessage('ISBN maximal panjang 13'),
-        body('total-page')
-            .trim()
-            .matches(/\D/)
-            .withMessage('Total Book Page number only')
-    ]
-}
-
 module.exports = {
     validateRegisterUser,
     validateEditUser

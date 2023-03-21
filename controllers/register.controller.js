@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Role = require('../models/role')
 const { validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 
@@ -25,11 +26,13 @@ const signUp = async (req, res) => {
         req.body.password = await bcrypt.hash(req.body.password, salt)
         
         const user = await User.create(req.body)
-        if(req.body.role) {
-            user.setRole(req.body.role)
-        }else {
-            user.setRole(1)
-        }
+        const [role, created] = await Role.findOrCreate({
+            where: { name: 'patron' },
+            defaults: { name: 'patron' }
+        })
+
+        if(created) user.setRole(created.id)
+        else user.setRole(role.id)
 
         res.redirect('/login')
     } catch (err) {

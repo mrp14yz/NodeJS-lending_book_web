@@ -103,12 +103,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link" role="button" onclick="document.getElementById('form-logout').submit()">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
               </p>
             </a>
+            <form action="/logout?_method=DELETE" method="post" id="form-logout" hidden>
+                <button type="submit"></button>
+            </form>
           </li>
         </ul>
       </nav>

@@ -30,7 +30,12 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/profile" >Profile</a></li>
                   <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('form-logout').submit()">Logout</a>
+                    <form action="/logout?_method=DELETE" method="post" id="form-logout" hidden>
+                      <button type="submit"></button>
+                    </form>
+                  </li>
                 </ul>
               </li>
             <% }else{ %>

@@ -1,8 +1,13 @@
 <main>
     <div class="container">
-    <% for(book of books){ %>
-        <%- include('../../partials/_book_item') %>
-    <% } %>
-    <%- include('../../partials/_pagination') %>
-    </div>      
+        <div class="row">
+            <div class="col">
+                <% for(book of books){ %>
+                    <%- include('../../partials/_book_item') %>
+                <% } %>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <%- include('../../partials/_pagination') %>
+    </div>
 </main>

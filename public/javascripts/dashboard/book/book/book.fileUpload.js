@@ -6,9 +6,9 @@ FilePond.registerPlugin(
 )
 
 FilePond.setOptions({
-    stylePanelAspectRatio: 150 / 100,
-    imageResizeTargetWidth: 100,
-    imageResizeTargetHeight: 150,
+    stylePanelAspectRatio: 450 / 300,
+    imageResizeTargetWidth: 300,
+    imageResizeTargetHeight: 450,
 })
 
 const inputElement = document.querySelector('input[type="file"]')

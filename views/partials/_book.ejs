@@ -1,0 +1,12 @@
+<div class="card border-1">
+    <div class="card-header bg-transparent" style="width: 250px; height: 350px;">
+        <img src="<%= book.cover %>" class="img-fluid" alt="<%= book.title %>">
+    </div>
+    <div class="card-body text-center">
+        <a href="/book/<%= book.slug %>" class="card-title text-decoration-none">
+            <h5>
+                <%= book.title %>
+            </h5>
+        </a>
+    </div>
+</div>

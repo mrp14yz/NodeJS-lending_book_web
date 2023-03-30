@@ -1,12 +1,11 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <% for(book of books){ %>
-                    <%- include('../../partials/_book_item') %>
-                <% } %>
+            <% for(book of books){ %>
+            <div class="col-auto p-2">
+                <%- include('../../partials/_book') %>
             </div>
-            <div class="col-4"></div>
+            <% } %>
         </div>
         <%- include('../../partials/_pagination') %>
     </div>

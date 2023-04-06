@@ -16,10 +16,17 @@ $(function () {
                     return meta.row + 1
                 }
             },
-            { data: "name" },
+            { 
+                data: "name", 
+                width: "20%",
+                render: function (data, type, row, meta){
+                    return type === "display" ?
+                    `<p class="text-break">${ data }</p>` : data
+                }
+            },
             { data: "email"},
             { data: "phone"},
-            { data: "address"},
+            { data: "address", width: "15%" },
             { 
                 data: "role",
                 render: function (data, type, row, meta){
@@ -39,7 +46,7 @@ $(function () {
                     <i class="fas fa-trash-alt"></i> Delete
                 </button>
                 `
-                    : data;
+                    : data
                 },
             },
         ],

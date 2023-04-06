@@ -99,6 +99,12 @@ const editUserById = async (req, res) => {
             const checkEmail = await User.findAll()
             if(checkEmail) throw new Error('Email already been registed')
         }
+        if(req.body.password !== user._previousDataValues.password){
+            const salt = await bcrypt.genSalt()
+            const newPassword = await bcrypt.hash(req.body.password, salt)
+            req.body.password = newPassword
+            console.log('newww password')
+        }
         await user.update(req.body)
 
         if(req.body.role) {

@@ -36,15 +36,6 @@ const User = sequelize.define('user', {
     address: DataTypes.STRING
 })
 
-User
-    .addHook('afterUpdate', async (user, options) => {
-        if(user.dataValues.password !== user._previousDataValues.password){
-            const salt = await bcrypt.genSalt()
-            const newPassword = await bcrypt.hash(user.password, salt)
-            user.setDataValue('password', newPassword)
-        }
-    })
-
 User.belongsToMany(Book, { through: Borrow_Book })
 Book.belongsToMany(User, { through: Borrow_Book })
 User.hasMany(Borrow_Book)

@@ -11,7 +11,7 @@ $(function () {
         columns: [
             { 
                 data: "id" , 
-                width: "10%",
+                width: "6%",
                 render: function (data, type, row, meta) {
                     return meta.row + 1
                 }
